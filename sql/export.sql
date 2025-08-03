@@ -10,7 +10,7 @@ CREATE TABLE categories_taskM (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users_taskM(id)
 );
 
 CREATE TABLE tasks_taskM (
@@ -20,7 +20,6 @@ CREATE TABLE tasks_taskM (
     description VARCHAR(200) NOT NULL,
     due_date DATE NOT NULL,
     is_done BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (user_id) REFERENCES users_taskM(id),
+    FOREIGN KEY (category_id) REFERENCES categories_taskM(id)
 );
-

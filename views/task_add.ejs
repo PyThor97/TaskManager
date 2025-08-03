@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <title>הוספת משימה</title>
+</head>
+
+<body>
+    <h1>הוספת משימה</h1>
+    <form action="/tasks/add" method="post">
+        <label>תיאור משימה:</label><br>
+        <input type="text" name="description" maxlength="200" required><br>
+        <label>תאריך יעד:</label><br>
+        <input type="date" name="due_date" required><br>
+        <label>קטגוריה:</label><br>
+        <select name="category_id">
+            <% for(let c of categories) { %>
+                <option value="<%= c.id %>">
+                    <%= c.name %>
+                </option>
+                <% } %>
+        </select><br><br>
+        <button>שמור</button>
+    </form>
+    <a href="/tasks/list">חזרה לרשימה</a>
+</body>
+
+</html>

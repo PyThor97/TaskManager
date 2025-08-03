@@ -23,9 +23,11 @@ global.db_pool = db.pool;
 const user_Mid = require("./middleware/user_Mid");
 const auth_R = require("./routers/auth_R");
 const tasks_R = require("./routers/tasks_R");
+const categories_R = require("./routers/categories_R");
 
 app.use("/", auth_R);
 app.use("/tasks", [user_Mid.isLogged], tasks_R);
+app.use("/categories", [user_Mid.isLogged], categories_R);
 
 app.get("/", [user_Mid.isLogged], (req, res) => {
     res.redirect("/tasks/list");

@@ -39,7 +39,28 @@ async function isLogged(req, res, next) {
     }
 }
 
+async function RegisterUser(req, res, next) {
+    let name = addSlashes(req.body.name || "");
+    let uname = addSlashes(req.body.uname || "");
+    let passwd = req.body.passwd || "";
+    let email = addSlashes(req.body.email || "");
+    let enc_pass = md5("A" + passwd);
+
+    const promisePool = db_pool.promise();
+    const q = `INSERT INTO users_taskM (name, uname, passwd, email)
+               VALUES ('${name}', '${uname}', '${enc_pass}', '${email}')`;
+
+    try {
+        await promisePool.query(q);
+    } catch (err) {
+        console.log(err);
+    }
+
+    next();
+}
+
 module.exports = {
     CheckLogin,
     isLogged,
+    RegisterUser
 };

@@ -18,4 +18,12 @@ router.get("/logout", (req, res) => {
     res.redirect("/login");
 });
 
+router.get("/register", (req, res) => {
+    res.render("register", { data: {} });
+});
+
+router.post("/register", [user_Mid.RegisterUser], (req, res) => {
+    res.redirect("/login");
+});
+
 module.exports = router;

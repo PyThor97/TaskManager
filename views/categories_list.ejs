@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="he">
-
 <head>
     <meta charset="UTF-8">
     <title>רשימת קטגוריות</title>
 </head>
-
 <body>
     <h1>הקטגוריות שלי</h1>
     <a href="/categories/add">+ הוסף קטגוריה</a>
     <ul>
         <% for(let cat of categories) { %>
-            <li>
-                <%= cat.name %>
-            </li>
-            <% } %>
+            <li><%= cat.name %></li>
+        <% } %>
     </ul>
     <a href="/tasks/list">חזרה למשימות</a>
 </body>
-
 </html>

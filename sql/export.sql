@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE users_taskM (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     uname VARCHAR(100) NOT NULL,
@@ -6,14 +6,14 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE categories (
+CREATE TABLE categories_taskM (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE tasks (
+CREATE TABLE tasks_taskM (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     category_id INT,
@@ -23,3 +23,4 @@ CREATE TABLE tasks (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+

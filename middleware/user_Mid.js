@@ -4,7 +4,7 @@ async function CheckLogin(req, res, next) {
     let uname = req.body.uname || "";
     let passwd = req.body.passwd || "";
     let enc_pass = md5("A" + passwd);
-    let Query = `SELECT * FROM users WHERE uname = '${addSlashes(uname)}' AND passwd = '${enc_pass}'`;
+    let Query = `SELECT * FROM users_taskM WHERE uname = '${addSlashes(uname)}' AND passwd = '${enc_pass}'`;
 
     const promisePool = db_pool.promise();
     let rows = [];

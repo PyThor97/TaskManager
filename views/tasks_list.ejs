@@ -7,74 +7,76 @@
 </head>
 
 <body>
-    <h1>רשימת משימות</h1>
+    <%- include("partials/header") %>
 
-    <form method="get" action="/tasks/list">
-        <label>סטטוס:</label>
-        <select name="status">
-            <option value="">הכל</option>
-            <option value="0" <%=filter.status=="0" ? "selected" : "" %>>לא בוצע</option>
-            <option value="1" <%=filter.status=="1" ? "selected" : "" %>>בוצע</option>
-        </select>
+        <h1>רשימת משימות</h1>
 
-        <label>קטגוריה:</label>
-        <select name="category_id">
-            <option value="-1">הכל</option>
-            <% for(let c of categories) { %>
-                <option value="<%= c.id %>" <%=filter.category_id==c.id ? "selected" : "" %>><%= c.name %>
-                </option>
-                <% } %>
-        </select>
+        <form method="get" action="/tasks/list">
+            <label>סטטוס:</label>
+            <select name="status">
+                <option value="">הכל</option>
+                <option value="0" <%=filter.status=="0" ? "selected" : "" %>>לא בוצע</option>
+                <option value="1" <%=filter.status=="1" ? "selected" : "" %>>בוצע</option>
+            </select>
 
-        <button>סנן</button>
-    </form>
+            <label>קטגוריה:</label>
+            <select name="category_id">
+                <option value="-1">הכל</option>
+                <% for(let c of categories) { %>
+                    <option value="<%= c.id %>" <%=filter.category_id==c.id ? "selected" : "" %>><%= c.name %>
+                    </option>
+                    <% } %>
+            </select>
 
-    <table border="1">
-        <tr>
-            <th>תיאור</th>
-            <th>תאריך יעד</th>
-            <th>קטגוריה</th>
-            <th>בוצע</th>
-            <th>פעולה</th>
-        </tr>
-        <% for(let t of tasks) { %>
+            <button>סנן</button>
+        </form>
+
+        <table border="1">
             <tr>
-                <td>
-                    <%= t.description %>
-                </td>
-                <td>
-                    <%= t.due_date %>
-                </td>
-                <td>
-                    <% let cat=categories.find(c=> c.id === t.category_id); %>
-                        <%= cat ? cat.name : "" %>
-                </td>
-                <td>
-                    <%= t.is_done ? "✔️" : "❌" %>
-                </td>
-                <td>
-                    <% if(!t.is_done) { %>
-                        <form method="post" action="/tasks/markdone">
-                            <input type="hidden" name="task_id" value="<%= t.id %>">
-                            <button>סמן כבוצע</button>
-                        </form>
-                        <% } %>
-                </td>
+                <th>תיאור</th>
+                <th>תאריך יעד</th>
+                <th>קטגוריה</th>
+                <th>בוצע</th>
+                <th>פעולה</th>
             </tr>
-            <% } %>
-    </table>
-
-    <div>
-        <% if(page> 0) { %>
-            <a href="?p=<%= page - 1 %>">⬅️ קודם</a>
-            <% } %>
-                עמוד <%= page + 1 %> מתוך <%= total_pages + 1 %>
-                        <% if(page < total_pages) { %>
-                            <a href="?p=<%= page + 1 %>">הבא ➡️</a>
+            <% for(let t of tasks) { %>
+                <tr>
+                    <td>
+                        <%= t.description %>
+                    </td>
+                    <td>
+                        <%= t.due_date %>
+                    </td>
+                    <td>
+                        <% let cat=categories.find(c=> c.id === t.category_id); %>
+                            <%= cat ? cat.name : "" %>
+                    </td>
+                    <td>
+                        <%= t.is_done ? "✔️" : "❌" %>
+                    </td>
+                    <td>
+                        <% if(!t.is_done) { %>
+                            <form method="post" action="/tasks/markdone">
+                                <input type="hidden" name="task_id" value="<%= t.id %>">
+                                <button>סמן כבוצע</button>
+                            </form>
                             <% } %>
-    </div>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
 
-    <a href="/tasks/add">+ הוסף משימה</a>
+        <div>
+            <% if(page> 0) { %>
+                <a href="?p=<%= page - 1 %>">⬅️ קודם</a>
+                <% } %>
+                    עמוד <%= page + 1 %> מתוך <%= total_pages + 1 %>
+                            <% if(page < total_pages) { %>
+                                <a href="?p=<%= page + 1 %>">הבא ➡️</a>
+                                <% } %>
+        </div>
+
+        <a href="/tasks/add">+ הוסף משימה</a>
 </body>
 
 </html>

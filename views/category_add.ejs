@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <title>הוספת קטגוריה</title>
+</head>
+
+<body>
+    <h1>הוספת קטגוריה</h1>
+    <form action="/categories/add" method="post">
+        <label for="name">שם קטגוריה:</label>
+        <input type="text" name="name" id="name" value="<%= data.name || '' %>" required>
+        <button>שמור</button>
+    </form>
+    <a href="/categories/list">חזרה</a>
+</body>
+
+</html>
